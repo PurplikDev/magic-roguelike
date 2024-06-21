@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0prfsm42ycti"]
+
+[ext_resource type="Script" path="res://scripts/entity.gd" id="1_wgo11"]
+[ext_resource type="Script" path="res://scripts/components/move_component.gd" id="2_3sk3g"]
+[ext_resource type="Script" path="res://scripts/components/input_component.gd" id="3_j56m1"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_bsbvv"]
+[ext_resource type="Texture2D" uid="uid://j82pycmlh2hj" path="res://assets/player_idle.png" id="5_skvcx"]
+[ext_resource type="Script" path="res://scripts/components/hitbox.gd" id="6_87f66"]
+[ext_resource type="Script" path="res://scripts/components/anchored_camera.gd" id="7_ejkcd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfhgc"]
+atlas = ExtResource("5_skvcx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhgc6"]
+atlas = ExtResource("5_skvcx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuksl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfhgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhgc6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iatlb"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5bbe"]
+size = Vector2(8, 14)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_wgo11")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_3sk3g")
+actor = NodePath("..")
+
+[node name="InputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_j56m1")
+move_component = NodePath("../MoveComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_bsbvv")
+max_health = 10.0
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_nuksl")
+autoplay = "default"
+frame_progress = 0.138592
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_iatlb")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("6_87f66")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_r5bbe")
+debug_color = Color(100, 0, 0, 0.42)
+
+[node name="AnchoredCamera" type="Camera2D" parent="." node_paths=PackedStringArray("actor")]
+offset = Vector2(0, -7)
+zoom = Vector2(3, 3)
+process_callback = 0
+script = ExtResource("7_ejkcd")
+actor = NodePath("..")

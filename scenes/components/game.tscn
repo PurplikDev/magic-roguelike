@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1l8ocb65k2jx"]
+
+[ext_resource type="PackedScene" uid="uid://d0prfsm42ycti" path="res://scenes/components/player.tscn" id="1_fptxh"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_k3dab"]
+[ext_resource type="Texture2D" uid="uid://64jmsjw5p72v" path="res://assets/tilemap.png" id="3_7oykb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fq4g7"]
+size = Vector2(128, 128)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jkk8u"]
+texture = ExtResource("3_7oykb")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_na5sb"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_jkk8u")
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_fptxh")]
+position = Vector2(77, 22)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_fq4g7")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_k3dab")
+
+[node name="Enviroment" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Enviroment"]
+tile_set = SubResource("TileSet_na5sb")
+format = 2
