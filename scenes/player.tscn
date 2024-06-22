@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=14 format=3 uid="uid://d0prfsm42ycti"]
 
-[ext_resource type="Script" path="res://scripts/entity.gd" id="1_wgo11"]
-[ext_resource type="Script" path="res://scripts/components/move_component.gd" id="2_3sk3g"]
-[ext_resource type="Script" path="res://scripts/components/input_component.gd" id="3_j56m1"]
-[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_bsbvv"]
+[ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
+[ext_resource type="Script" path="res://scripts/component/move_component.gd" id="2_q4lj7"]
+[ext_resource type="Script" path="res://scripts/component/input_component.gd" id="3_my80j"]
+[ext_resource type="Script" path="res://scripts/component/health_component.gd" id="4_3gjuo"]
+[ext_resource type="Script" path="res://scripts/component/knockback_component.gd" id="5_fesqj"]
 [ext_resource type="Texture2D" uid="uid://j82pycmlh2hj" path="res://assets/player_idle.png" id="5_skvcx"]
-[ext_resource type="Script" path="res://scripts/components/hitbox.gd" id="6_87f66"]
-[ext_resource type="Script" path="res://scripts/components/anchored_camera.gd" id="7_ejkcd"]
+[ext_resource type="Script" path="res://scripts/component/hitbox.gd" id="7_bu4xc"]
+[ext_resource type="Script" path="res://scripts/component/anchored_camera.gd" id="8_sis3l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfhgc"]
 atlas = ExtResource("5_skvcx")
@@ -37,19 +38,26 @@ radius = 4.0
 size = Vector2(8, 14)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_wgo11")
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_vlahr")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("2_3sk3g")
+script = ExtResource("2_q4lj7")
 actor = NodePath("..")
 
 [node name="InputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
-script = ExtResource("3_j56m1")
+script = ExtResource("3_my80j")
 move_component = NodePath("../MoveComponent")
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_bsbvv")
+script = ExtResource("4_3gjuo")
 max_health = 10.0
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("5_fesqj")
+move_component = NodePath("../MoveComponent")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
@@ -61,18 +69,22 @@ frame_progress = 0.138592
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_iatlb")
 
+[node name="AnchoredCamera" type="Camera2D" parent="." node_paths=PackedStringArray("actor")]
+offset = Vector2(0, -7)
+zoom = Vector2(3, 3)
+process_callback = 0
+script = ExtResource("8_sis3l")
+actor = NodePath("..")
+strength = 4.0
+lerp_speed = 5.0
+
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
-script = ExtResource("6_87f66")
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("7_bu4xc")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_r5bbe")
 debug_color = Color(100, 0, 0, 0.42)
-
-[node name="AnchoredCamera" type="Camera2D" parent="." node_paths=PackedStringArray("actor")]
-offset = Vector2(0, -7)
-zoom = Vector2(3, 3)
-process_callback = 0
-script = ExtResource("7_ejkcd")
-actor = NodePath("..")

@@ -2,6 +2,8 @@
 class_name Hitbox
 extends Area2D
 
+signal hit(damage_source: DamageSource)
+
 @export var health_component: HealthComponent:
 	set(value):
 		health_component = value
@@ -13,7 +15,7 @@ func _ready():
 
 func _on_area_entered(area: Area2D):
 	if area is Hurtbox:
-		pass
+		hit.emit(area.damage_source)
 
 func _get_configuration_warnings():
 	if health_component == null:
