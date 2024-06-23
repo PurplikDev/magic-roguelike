@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=22 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/move_component.gd" id="2_q4lj7"]
@@ -6,25 +6,71 @@
 [ext_resource type="Script" path="res://scripts/component/health_component.gd" id="4_3gjuo"]
 [ext_resource type="Script" path="res://scripts/component/knockback_component.gd" id="5_fesqj"]
 [ext_resource type="Texture2D" uid="uid://j82pycmlh2hj" path="res://assets/player_idle.png" id="5_skvcx"]
+[ext_resource type="Texture2D" uid="uid://bpswu3g78kip0" path="res://assets/hat_idle.png" id="6_bk72h"]
 [ext_resource type="Script" path="res://scripts/component/hitbox.gd" id="7_bu4xc"]
 [ext_resource type="Script" path="res://scripts/component/anchored_camera.gd" id="8_sis3l"]
+[ext_resource type="Texture2D" uid="uid://b7t4pm81x4g4s" path="res://assets/cloak_idle.png" id="8_vfrl3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jfhgc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hx6p"]
 atlas = ExtResource("5_skvcx")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xhgc6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwv0d"]
 atlas = ExtResource("5_skvcx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yw7bp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hx6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwv0d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qq6x"]
+atlas = ExtResource("6_bk72h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjq68"]
+atlas = ExtResource("6_bk72h")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nuksl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jfhgc")
+"texture": SubResource("AtlasTexture_0qq6x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xhgc6")
+"texture": SubResource("AtlasTexture_rjq68")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjlho"]
+atlas = ExtResource("8_vfrl3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qqon"]
+atlas = ExtResource("8_vfrl3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf0a6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjlho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qqon")
 }],
 "loop": true,
 "name": &"default",
@@ -41,6 +87,7 @@ size = Vector2(8, 14)
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_vlahr")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
@@ -55,15 +102,32 @@ move_component = NodePath("../MoveComponent")
 script = ExtResource("4_3gjuo")
 max_health = 10.0
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "move_component")]
 script = ExtResource("5_fesqj")
+actor = NodePath("..")
 move_component = NodePath("../MoveComponent")
+decay_strength = 15.0
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_yw7bp")
+autoplay = "default"
+
+[node name="HatSprite" type="AnimatedSprite2D" parent="."]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_nuksl")
 autoplay = "default"
 frame_progress = 0.138592
+
+[node name="CloakSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_yf0a6")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -73,16 +137,19 @@ shape = SubResource("CircleShape2D_iatlb")
 offset = Vector2(0, -7)
 zoom = Vector2(3, 3)
 process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("8_sis3l")
 actor = NodePath("..")
-strength = 4.0
+strength = 10.0
 lerp_speed = 5.0
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "knockback_component")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("7_bu4xc")
 health_component = NodePath("../HealthComponent")
+knockback_component = NodePath("../KnockbackComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)

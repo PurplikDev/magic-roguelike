@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddvqrwtm7j2wj"]
+[gd_scene load_steps=13 format=3 uid="uid://ddvqrwtm7j2wj"]
 
 [ext_resource type="Script" path="res://scripts/entity/entity.gd" id="1_x36fk"]
 [ext_resource type="Texture2D" uid="uid://cpdrtv1pwglgd" path="res://assets/enemy_idle.png" id="2_6rgwa"]
 [ext_resource type="Script" path="res://scripts/component/move_component.gd" id="2_nvxi6"]
+[ext_resource type="Script" path="res://scripts/component/health_component.gd" id="3_tye7n"]
 [ext_resource type="Script" path="res://scripts/component/hurtbox.gd" id="4_hcvh5"]
+[ext_resource type="Script" path="res://scripts/component/hitbox.gd" id="6_shrce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kglfg"]
 atlas = ExtResource("2_6rgwa")
@@ -33,17 +35,26 @@ radius = 4.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ijoe"]
 size = Vector2(8, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xeifm"]
+size = Vector2(8, 14)
+
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 3
+motion_mode = 1
+slide_on_ceiling = false
 script = ExtResource("1_x36fk")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("2_nvxi6")
 actor = NodePath("..")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_tye7n")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_1sg8k")
 autoplay = "default"
@@ -57,8 +68,20 @@ shape = SubResource("CircleShape2D_seit3")
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("4_hcvh5")
+damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_6ijoe")
+debug_color = Color(100, 0, 0, 0.42)
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("6_shrce")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_xeifm")
 debug_color = Color(100, 0, 0, 0.42)

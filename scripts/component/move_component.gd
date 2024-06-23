@@ -5,9 +5,10 @@ extends Node
 @export var speed: float = 100
 var direction: Vector2
 var velocity: Vector2
+var lock_movement: bool
 
 func _physics_process(delta):
-	if direction:
+	if direction && !lock_movement:
 		velocity = lerp(velocity, direction * speed, actor.LERP_SPEED * delta)
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, actor.LERP_SPEED * delta)
