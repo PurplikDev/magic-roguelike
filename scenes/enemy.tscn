@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddvqrwtm7j2wj"]
+[gd_scene load_steps=12 format=3 uid="uid://ddvqrwtm7j2wj"]
 
 [ext_resource type="Script" path="res://scripts/entity/entity.gd" id="1_x36fk"]
 [ext_resource type="Texture2D" uid="uid://cpdrtv1pwglgd" path="res://assets/enemy_idle.png" id="2_6rgwa"]
@@ -32,11 +32,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_seit3"]
 radius = 4.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ijoe"]
-size = Vector2(8, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xeifm"]
-size = Vector2(8, 14)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vivqk"]
+radius = 5.0
+height = 16.0
 
 [node name="Enemy" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -72,7 +70,7 @@ damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -7)
-shape = SubResource("RectangleShape2D_6ijoe")
+shape = SubResource("CapsuleShape2D_vivqk")
 debug_color = Color(100, 0, 0, 0.42)
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
@@ -83,5 +81,5 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
-shape = SubResource("RectangleShape2D_xeifm")
+shape = SubResource("CapsuleShape2D_vivqk")
 debug_color = Color(100, 0, 0, 0.42)

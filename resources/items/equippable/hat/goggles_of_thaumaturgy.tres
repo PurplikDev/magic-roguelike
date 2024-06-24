@@ -1,0 +1,109 @@
+[gd_resource type="Resource" script_class="Hat" load_steps=15 format=3 uid="uid://cdmfcb6dducj3"]
+
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="1_2pjfk"]
+[ext_resource type="Texture2D" uid="uid://b5f6gout0qs25" path="res://assets/items/equippable/hat/goggles_of_thaumaturgy.png" id="2_0kf2n"]
+[ext_resource type="Script" path="res://scripts/resource/item/hat.gd" id="3_vtu0l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk5bp"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5acp7"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8h5v"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ohh7"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ams24"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32rsm"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf7ct"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n0to"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc3ic"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxxou"]
+atlas = ExtResource("2_0kf2n")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4clh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk5bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5acp7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8h5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ohh7")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ams24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32rsm")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf7ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n0to")
+}],
+"loop": true,
+"name": &"move_right",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc3ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxxou")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 4.0
+}]
+
+[resource]
+script = ExtResource("3_vtu0l")
+item_sprite = SubResource("SpriteFrames_y4clh")
+item_name = "goggles_of_thaumaturgy"
+item_icon = ExtResource("1_2pjfk")

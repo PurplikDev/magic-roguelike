@@ -1,7 +1,8 @@
 class_name HealthComponent
 extends Node
 
-signal health_update(float)
+signal health_update(health: float)
+signal max_health_update(max_health: float)
 signal died
 
 @export var max_health: float

@@ -11,6 +11,7 @@ signal hit(damage_source: DamageSource)
 			update_configuration_warnings()
 
 @export var knockback_component: KnockbackComponent
+@export var damage_flash_component: DamageFlashComponent
 
 func _ready():
 	area_entered.connect(_on_area_entered)
@@ -21,6 +22,8 @@ func _on_area_entered(area: Area2D):
 		health_component.damage(area.damage_source.damage)
 		if knockback_component != null:
 			knockback_component.apply_knockback(area.damage_source.damage_source_pos, area.damage_source.damage)
+		if damage_flash_component != null:
+			damage_flash_component.flash()
 
 func _get_configuration_warnings():
 	if health_component == null:
