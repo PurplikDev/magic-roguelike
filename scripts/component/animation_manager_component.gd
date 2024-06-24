@@ -6,7 +6,7 @@ extends Node
 
 var direction: Vector2 = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if direction.length() > 0:
 		if direction.x > 0:
 			play("move_right")

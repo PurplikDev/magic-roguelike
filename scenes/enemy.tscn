@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/entity/entity.gd" id="1_x36fk"]
 [ext_resource type="Texture2D" uid="uid://cpdrtv1pwglgd" path="res://assets/enemy_idle.png" id="2_6rgwa"]
 [ext_resource type="Script" path="res://scripts/component/move_component.gd" id="2_nvxi6"]
-[ext_resource type="Script" path="res://scripts/component/health_component.gd" id="3_tye7n"]
+[ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="3_fw03v"]
 [ext_resource type="Script" path="res://scripts/component/hurtbox.gd" id="4_hcvh5"]
 [ext_resource type="Script" path="res://scripts/component/hitbox.gd" id="6_shrce"]
 
@@ -49,7 +49,7 @@ script = ExtResource("2_nvxi6")
 actor = NodePath("..")
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("3_tye7n")
+script = ExtResource("3_fw03v")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -73,11 +73,11 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_vivqk")
 debug_color = Color(100, 0, 0, 0.42)
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_stat")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("6_shrce")
-health_component = NodePath("../HealthComponent")
+health_stat = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
