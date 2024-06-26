@@ -167,9 +167,14 @@ script = ExtResource("9_ibe2b")
 actor = NodePath("../..")
 animated_sprites = [NodePath("../../DamageFlashComponent/BodySprite"), NodePath("../../DamageFlashComponent/AccessorySprite"), NodePath("../../DamageFlashComponent/CloakSprite"), NodePath("../../DamageFlashComponent/HatSprite")]
 
-[node name="SpellCastingComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor")]
+[node name="SpellCastingComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "cast_timer", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat")]
 script = ExtResource("10_f1s1l")
 actor = NodePath("../..")
+cast_timer = NodePath("../../Timers/CastTimer")
+ignis_stat = NodePath("../../Stats/IgnisStat")
+aer_stat = NodePath("../../Stats/AerStat")
+terra_stat = NodePath("../../Stats/TerraStat")
+aqua_stat = NodePath("../../Stats/AquaStat")
 
 [node name="Stats" type="Node" parent="."]
 
@@ -192,6 +197,18 @@ max_value = 25.0
 [node name="AquaStat" type="Node" parent="Stats"]
 script = ExtResource("10_0fapk")
 max_value = 25.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CastTimer" type="Timer" parent="Timers"]
+wait_time = 0.125
+
+[node name="PlayerHUD" parent="." node_paths=PackedStringArray("health_stat", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat") instance=ExtResource("15_pqtot")]
+health_stat = NodePath("../Stats/HealthStat")
+ignis_stat = NodePath("../Stats/IgnisStat")
+aer_stat = NodePath("../Stats/AerStat")
+terra_stat = NodePath("../Stats/TerraStat")
+aqua_stat = NodePath("../Stats/AquaStat")
 
 [node name="DamageFlashComponent" type="CanvasGroup" parent="."]
 script = ExtResource("8_ffurp")
@@ -247,12 +264,5 @@ damage_flash_component = NodePath("../DamageFlashComponent")
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_wcu7h")
 debug_color = Color(100, 0, 0, 0.42)
-
-[node name="PlayerHUD" parent="." node_paths=PackedStringArray("health_stat", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat") instance=ExtResource("15_pqtot")]
-health_stat = NodePath("../Stats/HealthStat")
-ignis_stat = NodePath("../Stats/IgnisStat")
-aer_stat = NodePath("../Stats/AerStat")
-terra_stat = NodePath("../Stats/TerraStat")
-aqua_stat = NodePath("../Stats/AquaStat")
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

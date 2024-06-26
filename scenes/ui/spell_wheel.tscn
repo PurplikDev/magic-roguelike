@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cahoqopha410"]
+
+[ext_resource type="Script" path="res://scripts/ui/spell_wheel.gd" id="1_ecrl8"]
+[ext_resource type="PackedScene" uid="uid://eoki4ekvh3bx" path="res://scenes/ui/elements/spell_element.tscn" id="1_m22oh"]
+
+[node name="SpellWheel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ecrl8")
+
+[node name="SpellElement" parent="." instance=ExtResource("1_m22oh")]
+layout_mode = 1

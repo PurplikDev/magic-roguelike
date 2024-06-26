@@ -16,7 +16,7 @@ func set_value(value: float):
 	if bar_tween:
 		bar_tween.kill()
 	bar_tween = get_tree().create_tween()
-	bar_tween.tween_property(background_bar, "value", value, 0.25).set_ease(Tween.EASE_IN)
+	bar_tween.tween_property(background_bar, "value", value, 0.35).set_ease(Tween.EASE_IN)
 
 func set_max_value(value: float):
 	progress_bar.max_value = value
