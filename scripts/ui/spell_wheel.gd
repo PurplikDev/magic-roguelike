@@ -33,11 +33,13 @@ func effect(p_scale: Vector2, p_rotation_degrees: float, time: float = 0.5):
 
 func refresh_spells():
 	for child in spell_elements.get_children():
-		child.queue_free()
+		child.free()
 	
 	for n in range(spell_component.spells.size()):
 		var element = spell_element.instantiate()
 		element.set_spell(spell_component.spells[n])
+		if spell_component.spells.size() == 1:
+			element.set_as_single()
 		spell_elements.add_child(element)
 	
 	calculate_rotation()
@@ -47,6 +49,9 @@ func calculate_rotation():
 	var current_index: int = 0
 	
 	var children = spell_elements.get_children()
+	
+	print(rotation_per_child)
+	print(spell_elements.get_child_count())
 	
 	for child in children:
 		if child is Control:

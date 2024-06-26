@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=36 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/interaction_component.gd" id="2_3vj4m"]
@@ -16,17 +16,39 @@
 [ext_resource type="Script" path="res://scripts/component/spell_casting_component.gd" id="10_f1s1l"]
 [ext_resource type="Script" path="res://scripts/resource/spell/spell.gd" id="10_rni6r"]
 [ext_resource type="Texture2D" uid="uid://bu85vt6axrkgu" path="res://assets/player.png" id="11_k753q"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="12_d6j76"]
+[ext_resource type="Texture2D" uid="uid://64jmsjw5p72v" path="res://assets/tilemap.png" id="13_7sqmx"]
 [ext_resource type="PackedScene" uid="uid://daisebv88or8x" path="res://scenes/ui/player_hud.tscn" id="15_pqtot"]
 
-[sub_resource type="Resource" id="Resource_fedw5"]
+[sub_resource type="Resource" id="Resource_g6rg5"]
 script = ExtResource("10_rni6r")
-spell_name = "cum"
-spell_icon = ExtResource("11_k753q")
-ignis_cost = 5.0
-aer_cost = 0.5
-terra_cost = 2.0
+spell_name = "test spell 1"
+spell_icon = ExtResource("12_d6j76")
+ignis_cost = 0.0
+aer_cost = 0.0
+terra_cost = 0.0
 aqua_cost = 0.0
-cast_cooldown = 1.0
+cast_cooldown = 0.0
+
+[sub_resource type="Resource" id="Resource_l5wep"]
+script = ExtResource("10_rni6r")
+spell_name = "test spell 2"
+spell_icon = ExtResource("11_k753q")
+ignis_cost = 0.0
+aer_cost = 0.0
+terra_cost = 0.0
+aqua_cost = 0.0
+cast_cooldown = 0.0
+
+[sub_resource type="Resource" id="Resource_6gyio"]
+script = ExtResource("10_rni6r")
+spell_name = "test spell 3"
+spell_icon = ExtResource("13_7sqmx")
+ignis_cost = 0.0
+aer_cost = 0.0
+terra_cost = 0.0
+aqua_cost = 0.0
+cast_cooldown = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntlom"]
 atlas = ExtResource("10_c405t")
@@ -44,13 +66,13 @@ region = Rect2(16, 16, 16, 16)
 atlas = ExtResource("10_c405t")
 region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4m7w"]
-atlas = ExtResource("10_c405t")
-region = Rect2(16, 64, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rnn4"]
 atlas = ExtResource("10_c405t")
 region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4m7w"]
+atlas = ExtResource("10_c405t")
+region = Rect2(16, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4y4yc"]
 atlas = ExtResource("10_c405t")
@@ -60,13 +82,13 @@ region = Rect2(16, 48, 16, 16)
 atlas = ExtResource("10_c405t")
 region = Rect2(32, 48, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3x7gv"]
-atlas = ExtResource("10_c405t")
-region = Rect2(16, 32, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnles"]
 atlas = ExtResource("10_c405t")
 region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x7gv"]
+atlas = ExtResource("10_c405t")
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2qd24"]
 animations = [{
@@ -94,10 +116,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j4m7w")
+"texture": SubResource("AtlasTexture_3rnn4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3rnn4")
+"texture": SubResource("AtlasTexture_j4m7w")
 }],
 "loop": true,
 "name": &"move_left",
@@ -116,10 +138,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3x7gv")
+"texture": SubResource("AtlasTexture_pnles")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pnles")
+"texture": SubResource("AtlasTexture_3x7gv")
 }],
 "loop": true,
 "name": &"move_up",
@@ -148,12 +170,11 @@ script = ExtResource("2_3vj4m")
 script = ExtResource("2_q4lj7")
 actor = NodePath("../..")
 
-[node name="InputComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component", "animation_component", "spell_casting_component", "interaction_component", "camera")]
+[node name="InputComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component", "animation_component", "interaction_component", "camera")]
 script = ExtResource("3_my80j")
 actor = NodePath("../..")
 move_component = NodePath("../MoveComponent")
 animation_component = NodePath("../AnimationManagerComponent")
-spell_casting_component = NodePath("../SpellCastingComponent")
 interaction_component = NodePath("../InteractionComponent")
 camera = NodePath("../../AnchoredCamera")
 
@@ -187,7 +208,7 @@ ignis_stat = NodePath("../../Stats/IgnisStat")
 aer_stat = NodePath("../../Stats/AerStat")
 terra_stat = NodePath("../../Stats/TerraStat")
 aqua_stat = NodePath("../../Stats/AquaStat")
-spells = Array[ExtResource("10_rni6r")]([SubResource("Resource_fedw5")])
+spells = Array[ExtResource("10_rni6r")]([SubResource("Resource_g6rg5"), SubResource("Resource_l5wep"), SubResource("Resource_6gyio")])
 
 [node name="Stats" type="Node" parent="."]
 
@@ -231,7 +252,7 @@ flash_color = Color(1, 0, 0, 1)
 [node name="BodySprite" type="AnimatedSprite2D" parent="DamageFlashComponent"]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_2qd24")
-animation = &"move_down"
+animation = &"move_up"
 autoplay = "idle"
 
 [node name="AccessorySprite" type="AnimatedSprite2D" parent="DamageFlashComponent"]

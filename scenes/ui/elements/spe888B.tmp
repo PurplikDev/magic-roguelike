@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://eoki4ekvh3bx"]
+[gd_scene load_steps=2 format=3 uid="uid://eoki4ekvh3bx"]
 
 [ext_resource type="Script" path="res://scripts/ui/elements/spell_element.gd" id="1_4d4h2"]
-[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_oteav"]
 
 [node name="SpellElement" type="Control"]
 layout_mode = 3
@@ -10,9 +9,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 60.0
+offset_left = -45.0
+offset_right = 45.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(45, 0)
 script = ExtResource("1_4d4h2")
 
 [node name="Texture" type="TextureRect" parent="."]
@@ -29,7 +30,6 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
-texture = ExtResource("2_oteav")
 expand_mode = 1
 stretch_mode = 5
 
