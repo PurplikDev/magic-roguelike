@@ -1,10 +1,14 @@
 class_name Spell
 extends Resource
 
-var spell: Spell
-var cast_cooldown: float
+@export var spell_name: String
+@export var spell_icon: Texture2D
 
-var ignis_cost: float
-var aer_cost: float
-var terra_cost: float
-var aqua_cost: float
+@export var ignis_cost: float
+@export var aer_cost: float
+@export var terra_cost: float
+@export var aqua_cost: float
+
+@export var cast_cooldown: float
+
+var spell: Spell

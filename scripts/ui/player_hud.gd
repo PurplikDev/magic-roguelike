@@ -6,13 +6,20 @@ extends CanvasLayer
 @onready var terra_bar: StatBar = $TerraBar
 @onready var aqua_bar: StatBar = $AquaBar
 
+@onready var spell_wheel: SpellWheel = $SpellWheel
+
 @export var health_stat: StatComponent
 @export var ignis_stat: StatComponent
 @export var aer_stat: StatComponent
 @export var terra_stat: StatComponent
 @export var aqua_stat: StatComponent
 
+@export var spell_component: SpellCastingComponent
+
 func _ready():
+	spell_wheel.spell_component = spell_component
+	
+	
 	health_bar.set_max_value(health_stat.max_value)
 	ignis_bar.set_max_value(ignis_stat.max_value)
 	aer_bar.set_max_value(aer_stat.max_value)

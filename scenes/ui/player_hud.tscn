@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://daisebv88or8x"]
+[gd_scene load_steps=4 format=3 uid="uid://daisebv88or8x"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_hud.gd" id="1_ccbg7"]
 [ext_resource type="PackedScene" uid="uid://cpxkxkutg3mpd" path="res://scenes/ui/elements/stat_bar.tscn" id="2_nc342"]
 [ext_resource type="PackedScene" uid="uid://cahoqopha410" path="res://scenes/ui/spell_wheel.tscn" id="3_e0b3n"]
-[ext_resource type="PackedScene" uid="uid://eoki4ekvh3bx" path="res://scenes/ui/elements/spell_element.tscn" id="3_qhkbj"]
 
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource("1_ccbg7")
@@ -44,19 +43,5 @@ offset_bottom = 74.0
 color = Color(0.235294, 0.831373, 0.988235, 1)
 
 [node name="SpellWheel" parent="." instance=ExtResource("3_e0b3n")]
-
-[node name="SpellElement" parent="SpellWheel" index="0"]
-rotation = -1.5708
-
-[node name="SpellElement6" parent="SpellWheel" instance=ExtResource("3_qhkbj")]
-layout_mode = 1
-
-[node name="SpellElement7" parent="SpellWheel" instance=ExtResource("3_qhkbj")]
-layout_mode = 1
-rotation = 1.5708
-
-[node name="SpellElement8" parent="SpellWheel" instance=ExtResource("3_qhkbj")]
-layout_mode = 1
-rotation = 3.14159
 
 [editable path="SpellWheel"]

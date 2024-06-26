@@ -9,7 +9,7 @@ extends Node
 @export var terra_stat: StatComponent
 @export var aqua_stat: StatComponent
 
-var spells: Array[Spell]
+@export var spells: Array[Spell]
 var current_spell: Spell
 var max_spell_amount: int
 

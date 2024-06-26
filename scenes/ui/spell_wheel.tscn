@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cahoqopha410"]
+[gd_scene load_steps=2 format=3 uid="uid://cahoqopha410"]
 
 [ext_resource type="Script" path="res://scripts/ui/spell_wheel.gd" id="1_ecrl8"]
-[ext_resource type="PackedScene" uid="uid://eoki4ekvh3bx" path="res://scenes/ui/elements/spell_element.tscn" id="1_m22oh"]
 
 [node name="SpellWheel" type="Control"]
 layout_mode = 3
@@ -18,5 +17,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ecrl8")
 
-[node name="SpellElement" parent="." instance=ExtResource("1_m22oh")]
+[node name="SpellElements" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.14159
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(90, 90)
