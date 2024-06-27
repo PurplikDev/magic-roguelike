@@ -4,6 +4,8 @@ extends Control
 @onready var spell_elements = $SpellElements
 @onready var spell_element = load("res://scenes/ui/elements/spell_element.tscn")
 
+@onready var current_spell_icon = $CurrentSpellIcon
+
 var spell_component: SpellCastingComponent
 var scale_tween: Tween
 var rotation_tween: Tween
@@ -32,6 +34,10 @@ func effect(p_scale: Vector2, p_rotation_degrees: float, time: float = 0.5):
 	rotation_tween.tween_property(spell_elements, "rotation_degrees", p_rotation_degrees, time).set_ease(Tween.EASE_OUT)
 
 func refresh_spells():
+	
+	if spell_component.current_spell != null:
+		current_spell_icon.texture = spell_component.current_spell.spell_icon
+	
 	for child in spell_elements.get_children():
 		child.free()
 	

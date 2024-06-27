@@ -10,7 +10,7 @@ extends Node
 @export var aqua_stat: StatComponent
 
 @export var spells: Array[Spell]
-var current_spell: Spell
+@export var current_spell: Spell
 var max_spell_amount: int
 
 func _ready():
