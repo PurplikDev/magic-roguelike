@@ -28,7 +28,10 @@ func stop_cast():
 
 func set_current_spell(index: int):
 	current_spell = spells[index]
-	cast_timer.wait_time = current_spell.cast_cooldown
+	if current_spell.cast_cooldown < 0.0001:
+		cast_timer.wait_time = 0.0001
+	else:
+		cast_timer.wait_time = current_spell.cast_cooldown
 
 func cast():
 	ignis_stat.decrease(current_spell.ignis_cost)

@@ -8,6 +8,7 @@ extends Control
 
 var spell_component: SpellCastingComponent
 var scale_tween: Tween
+var current_scale_tween: Tween
 var rotation_tween: Tween
 
 func _process(_delta):
@@ -18,7 +19,7 @@ func _process(_delta):
 
 func wheel_show():
 	refresh_spells()
-	effect(Vector2(1, 1), 0, 0.5)
+	effect(Vector2(1, 1), 0, 0.375)
 
 func wheel_hide():
 	effect(Vector2(0, 0), -180, 0.25)
@@ -26,15 +27,21 @@ func wheel_hide():
 func effect(p_scale: Vector2, p_rotation_degrees: float, time: float = 0.5):
 	if scale_tween:
 		scale_tween.kill()
+	if current_scale_tween:
+		current_scale_tween.kill()
 	if rotation_tween:
 		rotation_tween.kill()
+	
 	scale_tween = get_tree().create_tween()
 	scale_tween.tween_property(spell_elements, "scale", p_scale, time).set_ease(Tween.EASE_OUT)
+	
+	current_scale_tween = get_tree().create_tween()
+	current_scale_tween.tween_property(current_spell_icon, "scale", p_scale, time * 0.75).set_ease(Tween.EASE_OUT)
+	
 	rotation_tween = get_tree().create_tween()
 	rotation_tween.tween_property(spell_elements, "rotation_degrees", p_rotation_degrees, time).set_ease(Tween.EASE_OUT)
 
 func refresh_spells():
-	
 	if spell_component.current_spell != null:
 		current_spell_icon.texture = spell_component.current_spell.spell_icon
 	
@@ -43,7 +50,10 @@ func refresh_spells():
 	
 	for n in range(spell_component.spells.size()):
 		var element = spell_element.instantiate()
-		element.set_spell(spell_component.spells[n])
+		element.set_spell(spell_component.spells[n], n)
+		element.spell_pick.connect(func(value: int):
+			spell_component.set_current_spell(value)
+			wheel_hide())
 		if spell_component.spells.size() == 1:
 			element.set_as_single()
 		spell_elements.add_child(element)
@@ -55,9 +65,6 @@ func calculate_rotation():
 	var current_index: int = 0
 	
 	var children = spell_elements.get_children()
-	
-	print(rotation_per_child)
-	print(spell_elements.get_child_count())
 	
 	for child in children:
 		if child is Control:

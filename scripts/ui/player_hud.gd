@@ -19,7 +19,6 @@ extends CanvasLayer
 func _ready():
 	spell_wheel.spell_component = spell_component
 	
-	
 	health_bar.set_max_value(health_stat.max_value)
 	ignis_bar.set_max_value(ignis_stat.max_value)
 	aer_bar.set_max_value(aer_stat.max_value)

@@ -1,5 +1,7 @@
 extends Control
 
+signal spell_pick(index: int)
+
 @onready var texture = $Texture
 
 var size_tween: Tween
@@ -7,11 +9,15 @@ var scale_tween: Tween
 
 var parent_rotation: float = 0
 var spell: Spell
+var index: int
 var is_single: bool = false
 
 func _ready():
 	texture.mouse_entered.connect(begin_effect)
 	texture.mouse_exited.connect(end_effect)
+	texture.pressed.connect(func():
+		spell_pick.emit(index)
+		)
 
 func _process(_delta):
 	if get_parent() != null && get_parent() is Control:
@@ -38,10 +44,11 @@ func effect(p_size: Vector2, p_scale: Vector2):
 	scale_tween = get_tree().create_tween()
 	scale_tween.tween_property(texture, "scale", p_scale, 0.125).set_ease(Tween.EASE_OUT)
 
-func set_spell(p_spell: Spell):
+func set_spell(p_spell: Spell, p_index: int):
 	spell = p_spell
-	$Texture.texture = p_spell.spell_icon
+	$Texture.texture_normal = p_spell.spell_icon
 	$Texture/Label.text = p_spell.spell_name
+	index = p_index
 
 func set_as_single():
 	is_single = true
