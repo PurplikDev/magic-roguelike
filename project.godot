@@ -22,8 +22,8 @@ ItemDB="*res://scenes/singletons/item_db.tscn"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=854
+window/size/viewport_height=480
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"

@@ -14,8 +14,8 @@ func _process(delta):
 	zoom = lerp(zoom, Vector2(current_zoom, current_zoom), lerp_speed * delta)
 
 func zoom_in():
-	current_zoom = clampf(current_zoom + zoom_amount, 2.0, 4.5)
+	current_zoom = clampf(current_zoom + zoom_amount, 2.5, 5.0)
 	
 
 func zoom_out():
-		current_zoom = clampf(current_zoom - zoom_amount, 2.0, 4.5)
+		current_zoom = clampf(current_zoom - zoom_amount, 2.5, 5.0)

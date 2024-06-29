@@ -1,21 +1,16 @@
 class_name SpellWheel
-extends Control
+extends CanvasLayer
+
+@export var spell_component: SpellCastingComponent
 
 @onready var spell_elements = $SpellElements
 @onready var spell_element = load("res://scenes/ui/elements/spell_element.tscn")
 
 @onready var current_spell_icon = $CurrentSpellIcon
 
-var spell_component: SpellCastingComponent
 var scale_tween: Tween
 var current_scale_tween: Tween
 var rotation_tween: Tween
-
-func _process(_delta):
-	if Input.is_action_just_pressed("spell_wheel"):
-		wheel_show()
-	if Input.is_action_just_released("spell_wheel"):
-		wheel_hide()
 
 func wheel_show():
 	refresh_spells()

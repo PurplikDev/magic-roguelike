@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=38 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/interaction_component.gd" id="2_3vj4m"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="12_d6j76"]
 [ext_resource type="Texture2D" uid="uid://64jmsjw5p72v" path="res://assets/tilemap.png" id="13_7sqmx"]
 [ext_resource type="PackedScene" uid="uid://daisebv88or8x" path="res://scenes/ui/player_hud.tscn" id="15_pqtot"]
+[ext_resource type="PackedScene" uid="uid://cahoqopha410" path="res://scenes/ui/spell_wheel.tscn" id="16_fi40u"]
+[ext_resource type="PackedScene" uid="uid://blb2k377c7iiu" path="res://scenes/caster.tscn" id="21_cfg01"]
 
 [sub_resource type="Resource" id="Resource_g6rg5"]
 script = ExtResource("10_rni6r")
@@ -170,13 +172,16 @@ script = ExtResource("2_3vj4m")
 script = ExtResource("2_q4lj7")
 actor = NodePath("../..")
 
-[node name="InputComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component", "animation_component", "interaction_component", "camera")]
+[node name="InputComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component", "animation_component", "spell_casting_component", "interaction_component", "spell_wheel", "camera", "caster")]
 script = ExtResource("3_my80j")
 actor = NodePath("../..")
 move_component = NodePath("../MoveComponent")
 animation_component = NodePath("../AnimationManagerComponent")
+spell_casting_component = NodePath("../SpellCastingComponent")
 interaction_component = NodePath("../InteractionComponent")
+spell_wheel = NodePath("../../UserInterface/SpellWheel")
 camera = NodePath("../../AnchoredCamera")
+caster = NodePath("../../Caster")
 
 [node name="KnockbackComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component")]
 script = ExtResource("5_fesqj")
@@ -237,13 +242,17 @@ max_value = 25.0
 [node name="CastTimer" type="Timer" parent="Timers"]
 wait_time = 0.125
 
-[node name="PlayerHUD" parent="." node_paths=PackedStringArray("health_stat", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat", "spell_component") instance=ExtResource("15_pqtot")]
-health_stat = NodePath("../Stats/HealthStat")
-ignis_stat = NodePath("../Stats/IgnisStat")
-aer_stat = NodePath("../Stats/AerStat")
-terra_stat = NodePath("../Stats/TerraStat")
-aqua_stat = NodePath("../Stats/AquaStat")
-spell_component = NodePath("../Components/SpellCastingComponent")
+[node name="UserInterface" type="Node" parent="."]
+
+[node name="PlayerHUD" parent="UserInterface" node_paths=PackedStringArray("health_stat", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat") instance=ExtResource("15_pqtot")]
+health_stat = NodePath("../../Stats/HealthStat")
+ignis_stat = NodePath("../../Stats/IgnisStat")
+aer_stat = NodePath("../../Stats/AerStat")
+terra_stat = NodePath("../../Stats/TerraStat")
+aqua_stat = NodePath("../../Stats/AquaStat")
+
+[node name="SpellWheel" parent="UserInterface" node_paths=PackedStringArray("spell_component") instance=ExtResource("16_fi40u")]
+spell_component = NodePath("../../Components/SpellCastingComponent")
 
 [node name="DamageFlashComponent" type="CanvasGroup" parent="."]
 script = ExtResource("8_ffurp")
@@ -277,13 +286,13 @@ shape = SubResource("CircleShape2D_iatlb")
 
 [node name="AnchoredCamera" type="Camera2D" parent="." node_paths=PackedStringArray("actor")]
 offset = Vector2(0, -7)
-zoom = Vector2(3, 3)
+zoom = Vector2(3.5, 3.5)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("8_sis3l")
 actor = NodePath("..")
-strength = 8.0
+strength = 15.0
 lerp_speed = 5.0
 zoom_amount = 0.25
 
@@ -299,5 +308,8 @@ damage_flash_component = NodePath("../DamageFlashComponent")
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_wcu7h")
 debug_color = Color(100, 0, 0, 0.42)
+
+[node name="Caster" parent="." instance=ExtResource("21_cfg01")]
+position = Vector2(0, -7)
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

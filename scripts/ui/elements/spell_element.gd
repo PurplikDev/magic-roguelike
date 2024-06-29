@@ -25,10 +25,10 @@ func _process(_delta):
 	texture.rotation_degrees = (rotation_degrees * -1) - parent_rotation
 
 func begin_effect():
-	effect(Vector2(80, 0), Vector2(1.25, 1.25))
+	effect(Vector2(100, 0), Vector2(1.25, 1.25))
 
 func end_effect():
-	effect(Vector2(70, 0), Vector2(1, 1))
+	effect(Vector2(80, 0), Vector2(1, 1))
 
 func effect(p_size: Vector2, p_scale: Vector2):
 	if size_tween != null:
