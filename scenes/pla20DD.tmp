@@ -156,14 +156,13 @@ radius = 4.0
 radius = 5.0
 height = 16.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("spell_wheel", "camera", "caster", "move_component", "animation_component", "spell_casting_component", "interaction_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("spell_wheel", "camera", "move_component", "animation_component", "spell_casting_component", "interaction_component")]
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_vlahr")
 spell_wheel = NodePath("UserInterface/SpellWheel")
 camera = NodePath("AnchoredCamera")
-caster = NodePath("Caster")
 move_component = NodePath("Components/MoveComponent")
 animation_component = NodePath("Components/AnimationManagerComponent")
 spell_casting_component = NodePath("Components/SpellCastingComponent")

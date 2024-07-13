@@ -44,11 +44,13 @@ motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_x36fk")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("2_nvxi6")
-actor = NodePath("..")
+[node name="Component" type="Node" parent="."]
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="MoveComponent" type="Node" parent="Component" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_nvxi6")
+actor = NodePath("../..")
+
+[node name="HealthComponent" type="Node" parent="Component"]
 script = ExtResource("3_fw03v")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
@@ -77,7 +79,7 @@ debug_color = Color(100, 0, 0, 0.42)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("6_shrce")
-health_stat = NodePath("../HealthComponent")
+health_stat = NodePath("../Component/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)

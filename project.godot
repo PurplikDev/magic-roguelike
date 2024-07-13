@@ -11,19 +11,20 @@ config_version=5
 [application]
 
 config/name="Magic-roguelike"
+config/tags=PackedStringArray("2d", "topdown")
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
 [autoload]
 
-GameSettings="*res://scenes/singletons/game_settings.tscn"
-ItemDB="*res://scenes/singletons/item_db.tscn"
+ItemDB="*res://scripts/singleton/item_db.gd"
+GameSettings="*res://scripts/singleton/game_settings.gd"
 
 [display]
 
-window/size/viewport_width=854
-window/size/viewport_height=480
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"

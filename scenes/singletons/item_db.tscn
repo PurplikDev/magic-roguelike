@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://deu025q270wa"]
-
-[ext_resource type="Script" path="res://scripts/singleton/item_db.gd" id="1_1o6pg"]
-[ext_resource type="Resource" uid="uid://cdmfcb6dducj3" path="res://resources/items/equippable/hat/goggles_of_thaumaturgy.tres" id="2_r2wn0"]
-
-[node name="ItemDB" type="Node"]
-script = ExtResource("1_1o6pg")
-items = Array[Resource("res://scripts/resource/item/item.gd")]([ExtResource("2_r2wn0"), null])
