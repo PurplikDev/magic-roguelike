@@ -13,9 +13,6 @@ extends Entity
 
 var is_alive: bool = true
 
-func _ready():
-	GameManager.players.append(self)
-
 func _physics_process(_delta):
 	
 	if !is_alive:

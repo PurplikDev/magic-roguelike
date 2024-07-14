@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=3 uid="uid://djly81icdmede"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_r8h7v"]
+[ext_resource type="Theme" uid="uid://4mecpcfhpy07" path="res://resources/themes/main_menu_theme.tres" id="1_xwmqa"]
+[ext_resource type="Texture2D" uid="uid://c5ni7mfv68212" path="res://assets/entity/player.png" id="2_4n6cr"]
+[ext_resource type="Texture2D" uid="uid://bt14k03dq5iso" path="res://assets/ui/button.png" id="2_ufo1r"]
+[ext_resource type="Texture2D" uid="uid://44knn1gkjgg" path="res://assets/props/campfire.png" id="3_xhk20"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly06t"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="Curve" id="Curve_412ef"]
+_data = [Vector2(0, 1), 0.0, 0.0408402, 0, 0, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5een6"]
+offsets = PackedFloat32Array(0, 0.846995)
+colors = PackedColorArray(1, 0.462745, 0, 1, 0.0846899, 0.0846899, 0.0846899, 1)
+
+[sub_resource type="Gradient" id="Gradient_0tonq"]
+offsets = PackedFloat32Array(0.704918, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_r8h7v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xwmqa")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.5
+offset_top = 50.0
+offset_right = 109.5
+offset_bottom = 105.0
+grow_horizontal = 2
+text = "Auromancy"
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -85.0
+offset_right = -25.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Play"
+icon = ExtResource("2_ufo1r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -85.0
+offset_right = 175.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit"
+icon = ExtResource("2_ufo1r")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath(".")
+
+[node name="MainMenuCamera" type="Camera2D" parent="RemoteTransform2D"]
+zoom = Vector2(3, 3)
+process_callback = 0
+
+[node name="Scene" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Scene"]
+position = Vector2(-40, 8)
+texture = SubResource("AtlasTexture_ly06t")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Scene"]
+texture = ExtResource("3_xhk20")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Scene/Sprite2D2"]
+amount = 16
+lifetime = 1.5
+speed_scale = 0.5
+explosiveness = 0.1
+randomness = 1.0
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 35.0
+initial_velocity_max = 50.0
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+angle_min = -25.0
+angle_max = 25.0
+scale_amount_min = 2.5
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_412ef")
+color_ramp = SubResource("Gradient_5een6")
+color_initial_ramp = SubResource("Gradient_0tonq")
+
+[connection signal="pressed" from="CanvasLayer/Control/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/QuitButton" to="." method="_on_quit_button_pressed"]
