@@ -11,7 +11,16 @@ extends Entity
 @export var spell_casting_component: SpellCastingComponent
 @export var interaction_component: InteractionComponent
 
+var is_alive: bool = true
+
+func _ready():
+	GameManager.players.append(self)
+
 func _physics_process(_delta):
+	
+	if !is_alive:
+		return
+	
 	if move_component != null:
 		move_component.direction = Input.get_vector("left", "right", "up", "down")
 	
@@ -47,3 +56,9 @@ func _physics_process(_delta):
 func _on_hitbox_hit(_damage_source):
 	var inventory_component: InventoryComponent = $Components/InventoryComponent
 	inventory_component.hat = ItemDB.get_item("goggles_of_thaumaturgy")
+
+
+func _on_health_stat_value_empty():
+	is_alive = false
+	move_component.direction = Vector2.ZERO
+	GameManager.update_players()
