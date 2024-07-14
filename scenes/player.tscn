@@ -281,7 +281,7 @@ shape = SubResource("CircleShape2D_iatlb")
 
 [node name="AnchoredCamera" type="Camera2D" parent="." node_paths=PackedStringArray("actor")]
 offset = Vector2(0, -7)
-zoom = Vector2(3.5, 3.5)
+zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
