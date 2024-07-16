@@ -21,7 +21,7 @@ config/icon="res://assets/icon.svg"
 ItemDB="*res://scripts/singleton/item_db.gd"
 GameSettings="*res://scripts/singleton/game_settings.gd"
 GameManager="*res://scripts/singleton/game_manager.gd"
-SceneManager="*res://scripts/singleton/scene_manager.gd"
+SceneManager="*res://scenes/singleton/scene_manager.tscn"
 
 [display]
 

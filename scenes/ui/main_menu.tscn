@@ -1,26 +1,212 @@
-[gd_scene load_steps=10 format=3 uid="uid://djly81icdmede"]
+[gd_scene load_steps=25 format=3 uid="uid://djly81icdmede"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_r8h7v"]
 [ext_resource type="Theme" uid="uid://4mecpcfhpy07" path="res://resources/themes/main_menu_theme.tres" id="1_xwmqa"]
 [ext_resource type="Texture2D" uid="uid://c5ni7mfv68212" path="res://assets/entity/player.png" id="2_4n6cr"]
 [ext_resource type="Texture2D" uid="uid://bt14k03dq5iso" path="res://assets/ui/button.png" id="2_ufo1r"]
 [ext_resource type="Texture2D" uid="uid://44knn1gkjgg" path="res://assets/props/campfire.png" id="3_xhk20"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ly06t"]
-atlas = ExtResource("2_4n6cr")
-region = Rect2(16, 0, 16, 16)
+[ext_resource type="Texture2D" uid="uid://cy03wpg5symcd" path="res://assets/ui/main_menu/background_1.png" id="6_7ibgf"]
 
 [sub_resource type="Curve" id="Curve_412ef"]
-_data = [Vector2(0, 1), 0.0, 0.0408402, 0, 0, Vector2(1, 0), -1.0, 0.0, 1, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, -6.22811, 0, 0, Vector2(0.332487, 0.16537), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.24774, 0.0, 1, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_5een6"]
-offsets = PackedFloat32Array(0, 0.846995)
+offsets = PackedFloat32Array(0, 0.377049)
 colors = PackedColorArray(1, 0.462745, 0, 1, 0.0846899, 0.0846899, 0.0846899, 1)
 
 [sub_resource type="Gradient" id="Gradient_0tonq"]
 offsets = PackedFloat32Array(0.704918, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76i3v"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj7iv"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ge5"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qc1u"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydwwt"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bgji"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c22o1"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ccdo"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcg0k"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orb55"]
+atlas = ExtResource("2_4n6cr")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jndxh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76i3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj7iv")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ge5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qc1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydwwt")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_88ge5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydwwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bgji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c22o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ccdo")
+}],
+"loop": false,
+"name": &"wake_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcg0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orb55")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_ric88"]
+resource_name = "intro_animation"
+length = 6.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RemoteTransform2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 5),
+"transitions": PackedFloat32Array(0.25, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, -160), Vector2(0, -160), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.5, 6.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qqf4g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RemoteTransform2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mwu2a"]
+resource_name = "play_game"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scene/Player")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"wake_up", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"walk_right", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scene/Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7.5, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 8), Vector2(120, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6gyl"]
+_data = {
+"RESET": SubResource("Animation_qqf4g"),
+"intro_animation": SubResource("Animation_ric88"),
+"play_game": SubResource("Animation_mwu2a")
+}
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_r8h7v")
@@ -95,27 +281,25 @@ process_callback = 0
 
 [node name="Scene" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Scene"]
-position = Vector2(-40, 8)
-texture = SubResource("AtlasTexture_ly06t")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Scene"]
+[node name="Campfire" type="Sprite2D" parent="Scene"]
 texture = ExtResource("3_xhk20")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Scene/Sprite2D2"]
-amount = 16
-lifetime = 1.5
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Scene/Campfire"]
+amount = 64
+lifetime = 5.0
 speed_scale = 0.5
-explosiveness = 0.1
 randomness = 1.0
 lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.0
 direction = Vector2(0, -1)
-spread = 15.0
+spread = 10.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 35.0
 initial_velocity_max = 50.0
 radial_accel_min = -5.0
 radial_accel_max = 5.0
+tangential_accel_min = -16.0
 angle_min = -25.0
 angle_max = 25.0
 scale_amount_min = 2.5
@@ -123,6 +307,46 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_412ef")
 color_ramp = SubResource("Gradient_5een6")
 color_initial_ramp = SubResource("Gradient_0tonq")
+
+[node name="Player" type="AnimatedSprite2D" parent="Scene"]
+position = Vector2(-40, 8)
+sprite_frames = SubResource("SpriteFrames_jndxh")
+animation = &"walk_right"
+autoplay = "sleeping"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Scene"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Scene/ParallaxBackground"]
+modulate = Color(0.25, 0.25, 0.25, 1)
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(284, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Scene/ParallaxBackground/ParallaxLayer"]
+position = Vector2(-11, -62)
+scale = Vector2(0.888889, 0.888889)
+texture = ExtResource("6_7ibgf")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Scene/ParallaxBackground"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+motion_scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="Scene/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(21, -49)
+scale = Vector2(0.811111, 0.811111)
+texture = ExtResource("6_7ibgf")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Scene/ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Scene/ParallaxBackground/ParallaxLayer3"]
+position = Vector2(0, -34)
+scale = Vector2(0.677778, 0.677778)
+texture = ExtResource("6_7ibgf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e6gyl")
+}
+autoplay = "intro_animation"
 
 [connection signal="pressed" from="CanvasLayer/Control/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/QuitButton" to="." method="_on_quit_button_pressed"]

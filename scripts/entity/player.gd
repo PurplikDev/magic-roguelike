@@ -58,4 +58,4 @@ func _on_hitbox_hit(_damage_source):
 func _on_health_stat_value_empty():
 	is_alive = false
 	move_component.direction = Vector2.ZERO
-	GameManager.update_players()
+	GameManager.end_game()
