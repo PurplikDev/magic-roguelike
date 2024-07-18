@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnsrvlra02r2d"]
+
+[ext_resource type="Script" path="res://scripts/ui/death_screen.gd" id="1_4o53f"]
+[ext_resource type="Theme" uid="uid://4mecpcfhpy07" path="res://resources/themes/main_menu_theme.tres" id="1_df6pa"]
+[ext_resource type="Texture2D" uid="uid://bt14k03dq5iso" path="res://assets/ui/button.png" id="2_w2smd"]
+
+[node name="DeathScreen" type="CanvasLayer"]
+script = ExtResource("1_4o53f")
+
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_df6pa")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.25, 0.25, 0.294118)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -102.5
+offset_right = 148.0
+offset_bottom = -47.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You are dead :3"
+
+[node name="Retry" type="Button" parent="Control"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = 32.5
+offset_right = -25.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Retry"
+icon = ExtResource("2_w2smd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="Control"]
+custom_minimum_size = Vector2(150, 35)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = 32.5
+offset_right = 175.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Quit
+"
+icon = ExtResource("2_w2smd")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Control/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]

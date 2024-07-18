@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://ce2w11wyeooa"]
+
+[ext_resource type="Script" path="res://scripts/resource/spell.gd" id="1_ge1nn"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_3ampe"]
+[ext_resource type="PackedScene" uid="uid://bkfqmhfp1dm72" path="res://scenes/spell_scenes/magic_bolt.tscn" id="3_xp43v"]
+
+[resource]
+script = ExtResource("1_ge1nn")
+spell_name = "Magic Bolt"
+spell_icon = ExtResource("2_3ampe")
+ignis_cost = 2.5
+aer_cost = 5.0
+terra_cost = 2.5
+aqua_cost = 2.5
+cast_cooldown = 0.5
+spell_scene = ExtResource("3_xp43v")

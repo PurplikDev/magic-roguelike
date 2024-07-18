@@ -19,6 +19,7 @@ func _ready():
 func _on_area_entered(area: Area2D):
 	if area is Hurtbox:
 		hit.emit(area.damage_source)
+		area.hit.emit()
 		health_stat.decrease(area.damage_source.damage)
 		if knockback_component != null:
 			knockback_component.apply_knockback(area.damage_source.damage_source_pos, area.damage_source.damage)

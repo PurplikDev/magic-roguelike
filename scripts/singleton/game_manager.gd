@@ -7,4 +7,3 @@ func end_game():
 		end_game_tween.kill()
 	end_game_tween = get_tree().create_tween()
 	end_game_tween.tween_property(Engine, "time_scale", 0.25, 1.0)
-	

@@ -11,6 +11,8 @@ extends Entity
 @export var spell_casting_component: SpellCastingComponent
 @export var interaction_component: InteractionComponent
 
+@onready var death_screen = $UserInterface/DeathScreen
+
 var is_alive: bool = true
 
 func _physics_process(_delta):
@@ -58,4 +60,5 @@ func _on_hitbox_hit(_damage_source):
 func _on_health_stat_value_empty():
 	is_alive = false
 	move_component.direction = Vector2.ZERO
-	GameManager.end_game()
+	# GameManager.end_game()
+	death_screen.display()

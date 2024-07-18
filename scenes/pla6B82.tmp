@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=30 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/interaction_component.gd" id="2_3vj4m"]
@@ -10,11 +10,9 @@
 [ext_resource type="Script" path="res://scripts/component/anchored_camera.gd" id="8_sis3l"]
 [ext_resource type="Script" path="res://scripts/component/inventory_component.gd" id="8_yjaoh"]
 [ext_resource type="Script" path="res://scripts/component/animation_manager_component.gd" id="9_ibe2b"]
-[ext_resource type="Resource" uid="uid://ce2w11wyeooa" path="res://resources/spells/magic_bolt.tres" id="9_p47wb"]
 [ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="10_0fapk"]
 [ext_resource type="Texture2D" uid="uid://c5ni7mfv68212" path="res://assets/entity/player.png" id="10_c405t"]
 [ext_resource type="Script" path="res://scripts/component/spell_casting_component.gd" id="10_f1s1l"]
-[ext_resource type="PackedScene" uid="uid://bnsrvlra02r2d" path="res://scenes/ui/death_screen.tscn" id="13_boobn"]
 [ext_resource type="PackedScene" uid="uid://daisebv88or8x" path="res://scenes/ui/player_hud.tscn" id="15_pqtot"]
 [ext_resource type="PackedScene" uid="uid://cahoqopha410" path="res://scenes/ui/spell_wheel.tscn" id="16_fi40u"]
 [ext_resource type="Texture2D" uid="uid://cmjl1babv3338" path="res://assets/wand.png" id="20_4emjf"]
@@ -168,16 +166,13 @@ script = ExtResource("9_ibe2b")
 actor = NodePath("../..")
 animated_sprites = [NodePath("../../DamageFlashComponent/BodySprite"), NodePath("../../DamageFlashComponent/AccessorySprite"), NodePath("../../DamageFlashComponent/CloakSprite"), NodePath("../../DamageFlashComponent/HatSprite")]
 
-[node name="SpellCastingComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "cast_timer", "cast_marker", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat")]
+[node name="SpellCastingComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "ignis_stat", "aer_stat", "terra_stat", "aqua_stat")]
 script = ExtResource("10_f1s1l")
 actor = NodePath("../..")
-cast_timer = NodePath("../../Timers/CastTimer")
-cast_marker = NodePath("../../Caster/Sprite2D/CastMarker")
 ignis_stat = NodePath("../../Stats/IgnisStat")
 aer_stat = NodePath("../../Stats/AerStat")
 terra_stat = NodePath("../../Stats/TerraStat")
 aqua_stat = NodePath("../../Stats/AquaStat")
-spells = Array[Resource("res://scripts/resource/spell.gd")]([ExtResource("9_p47wb")])
 
 [node name="Stats" type="Node" parent="."]
 
@@ -205,7 +200,6 @@ max_value = 25.0
 
 [node name="CastTimer" type="Timer" parent="Timers"]
 wait_time = 0.125
-one_shot = true
 
 [node name="UserInterface" type="Node" parent="."]
 
@@ -218,8 +212,6 @@ aqua_stat = NodePath("../../Stats/AquaStat")
 
 [node name="SpellWheel" parent="UserInterface" node_paths=PackedStringArray("spell_component") instance=ExtResource("16_fi40u")]
 spell_component = NodePath("../../Components/SpellCastingComponent")
-
-[node name="DeathScreen" parent="UserInterface" instance=ExtResource("13_boobn")]
 
 [node name="DamageFlashComponent" type="CanvasGroup" parent="."]
 script = ExtResource("8_ffurp")
@@ -285,8 +277,9 @@ texture = ExtResource("20_4emjf")
 offset = Vector2(0, 4)
 flip_v = true
 
-[node name="CastMarker" type="Node2D" parent="Caster/Sprite2D"]
+[node name="Marker2D" type="Marker2D" parent="Caster/Sprite2D"]
 position = Vector2(-9.53674e-07, 16)
+gizmo_extents = 8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Caster"]
 

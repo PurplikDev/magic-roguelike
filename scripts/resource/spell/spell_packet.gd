@@ -1,2 +1,0 @@
-class_name SpellPacket
-extends Resource

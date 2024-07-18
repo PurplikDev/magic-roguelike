@@ -13,6 +13,9 @@ var current_scale_tween: Tween
 var rotation_tween: Tween
 
 func wheel_show():
+	if spell_component.spells.size() <= 1 && spell_component.current_spell != null:
+		return
+	
 	refresh_spells()
 	effect(Vector2(1, 1), 0, 0.375)
 

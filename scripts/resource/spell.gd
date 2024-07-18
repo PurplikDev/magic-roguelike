@@ -11,4 +11,4 @@ extends Resource
 
 @export var cast_cooldown: float
 
-var spell: Spell
+@export var spell_scene: PackedScene

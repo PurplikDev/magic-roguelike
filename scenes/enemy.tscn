@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddvqrwtm7j2wj"]
+[gd_scene load_steps=14 format=3 uid="uid://ddvqrwtm7j2wj"]
 
 [ext_resource type="Script" path="res://scripts/entity/entity.gd" id="1_x36fk"]
 [ext_resource type="Texture2D" uid="uid://cpdrtv1pwglgd" path="res://assets/enemy_idle.png" id="2_6rgwa"]
 [ext_resource type="Script" path="res://scripts/component/move_component.gd" id="2_nvxi6"]
 [ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="3_fw03v"]
 [ext_resource type="Script" path="res://scripts/component/hurtbox.gd" id="4_hcvh5"]
+[ext_resource type="Script" path="res://scripts/component/knockback_component.gd" id="4_trkmc"]
+[ext_resource type="Script" path="res://scripts/component/damage_flash_component.gd" id="5_fpqg1"]
 [ext_resource type="Script" path="res://scripts/component/hitbox.gd" id="6_shrce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kglfg"]
@@ -53,7 +55,17 @@ actor = NodePath("../..")
 [node name="HealthComponent" type="Node" parent="Component"]
 script = ExtResource("3_fw03v")
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+[node name="KnockbackComponent" type="Node" parent="Component" node_paths=PackedStringArray("actor", "move_component")]
+script = ExtResource("4_trkmc")
+actor = NodePath("../..")
+move_component = NodePath("../MoveComponent")
+decay_strength = 10.0
+
+[node name="DamageFlashComponent" type="CanvasGroup" parent="."]
+script = ExtResource("5_fpqg1")
+flash_color = Color(0.5, 0, 0, 1)
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="DamageFlashComponent"]
 y_sort_enabled = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_1sg8k")
@@ -75,11 +87,13 @@ position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_vivqk")
 debug_color = Color(100, 0, 0, 0.42)
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_stat")]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_stat", "knockback_component", "damage_flash_component")]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("6_shrce")
 health_stat = NodePath("../Component/HealthComponent")
+knockback_component = NodePath("../Component/KnockbackComponent")
+damage_flash_component = NodePath("../DamageFlashComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -7)
