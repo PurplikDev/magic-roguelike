@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://dljkd0so71cc2"]
+
+[ext_resource type="Script" path="res://scripts/resource/spell.gd" id="1_u0ibc"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_f3bsx"]
+[ext_resource type="PackedScene" uid="uid://bowslkefjy2dg" path="res://scenes/spell_scenes/terra_wall.tscn" id="3_l1qer"]
+
+[resource]
+script = ExtResource("1_u0ibc")
+spell_name = "Terra Wall"
+spell_icon = ExtResource("2_f3bsx")
+ignis_cost = 0.0
+aer_cost = 0.0
+terra_cost = 10.0
+aqua_cost = 0.0
+cast_cooldown = 5.0
+spell_scene = ExtResource("3_l1qer")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1l8ocb65k2jx"]
+[gd_scene load_steps=9 format=3 uid="uid://d1l8ocb65k2jx"]
 
 [ext_resource type="PackedScene" uid="uid://d0prfsm42ycti" path="res://scenes/player.tscn" id="1_fptxh"]
 [ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_k3dab"]
 [ext_resource type="Texture2D" uid="uid://64jmsjw5p72v" path="res://assets/tilemap.png" id="3_7oykb"]
 [ext_resource type="PackedScene" uid="uid://ddvqrwtm7j2wj" path="res://scenes/enemy.tscn" id="4_3wqih"]
+[ext_resource type="PackedScene" uid="uid://bg70mb0i3n722" path="res://scenes/spell_scenes/aqua_field.tscn" id="5_cg4ll"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fq4g7"]
 size = Vector2(128, 128)
@@ -62,3 +63,6 @@ format = 2
 
 [node name="Enemy" parent="." instance=ExtResource("4_3wqih")]
 position = Vector2(118, -21)
+
+[node name="AquaField" parent="." instance=ExtResource("5_cg4ll")]
+position = Vector2(123, 18)

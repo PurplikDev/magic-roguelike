@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://5px86a03d1hq"]
+
+[ext_resource type="Script" path="res://scripts/resource/spell.gd" id="1_agkg2"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_svaox"]
+[ext_resource type="PackedScene" uid="uid://bg70mb0i3n722" path="res://scenes/spell_scenes/aqua_field.tscn" id="3_05tdf"]
+
+[resource]
+script = ExtResource("1_agkg2")
+spell_name = "Aqua Field"
+spell_icon = ExtResource("2_svaox")
+ignis_cost = 0.0
+aer_cost = 2.5
+terra_cost = 0.0
+aqua_cost = 5.0
+cast_cooldown = 5.0
+spell_scene = ExtResource("3_05tdf")

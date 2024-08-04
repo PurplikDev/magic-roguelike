@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=35 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/interaction_component.gd" id="2_3vj4m"]
@@ -13,7 +13,10 @@
 [ext_resource type="Resource" uid="uid://ce2w11wyeooa" path="res://resources/spells/magic_bolt.tres" id="9_p47wb"]
 [ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="10_0fapk"]
 [ext_resource type="Texture2D" uid="uid://c5ni7mfv68212" path="res://assets/entity/player.png" id="10_c405t"]
+[ext_resource type="Resource" uid="uid://ek8jy82kr6cp" path="res://resources/spells/flame.tres" id="10_eu4x4"]
 [ext_resource type="Script" path="res://scripts/component/spell_casting_component.gd" id="10_f1s1l"]
+[ext_resource type="Resource" uid="uid://5px86a03d1hq" path="res://resources/spells/aqua_field.tres" id="11_spif7"]
+[ext_resource type="Resource" uid="uid://dljkd0so71cc2" path="res://resources/spells/terra_wall.tres" id="12_t05ho"]
 [ext_resource type="PackedScene" uid="uid://bnsrvlra02r2d" path="res://scenes/ui/death_screen.tscn" id="13_boobn"]
 [ext_resource type="PackedScene" uid="uid://daisebv88or8x" path="res://scenes/ui/player_hud.tscn" id="15_pqtot"]
 [ext_resource type="PackedScene" uid="uid://cahoqopha410" path="res://scenes/ui/spell_wheel.tscn" id="16_fi40u"]
@@ -126,7 +129,7 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("spell_wheel", "camera", "caster", "move_component", "animation_component", "spell_casting_component", "interaction_component")]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 53
 motion_mode = 1
 script = ExtResource("1_vlahr")
 spell_wheel = NodePath("UserInterface/SpellWheel")
@@ -142,9 +145,10 @@ interaction_component = NodePath("Components/InteractionComponent")
 [node name="InteractionComponent" type="Node" parent="Components"]
 script = ExtResource("2_3vj4m")
 
-[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor")]
+[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "speed")]
 script = ExtResource("2_q4lj7")
 actor = NodePath("../..")
+speed = NodePath("../../Stats/SpeedStat")
 
 [node name="KnockbackComponent" type="Node" parent="Components" node_paths=PackedStringArray("actor", "move_component")]
 script = ExtResource("5_fesqj")
@@ -173,17 +177,22 @@ script = ExtResource("10_f1s1l")
 actor = NodePath("../..")
 cast_timer = NodePath("../../Timers/CastTimer")
 cast_marker = NodePath("../../Caster/Sprite2D/CastMarker")
+is_free = true
 ignis_stat = NodePath("../../Stats/IgnisStat")
 aer_stat = NodePath("../../Stats/AerStat")
 terra_stat = NodePath("../../Stats/TerraStat")
 aqua_stat = NodePath("../../Stats/AquaStat")
-spells = Array[Resource("res://scripts/resource/spell.gd")]([ExtResource("9_p47wb")])
+spells = Array[Resource("res://scripts/resource/spell.gd")]([ExtResource("9_p47wb"), ExtResource("10_eu4x4"), ExtResource("11_spif7"), ExtResource("12_t05ho")])
 
 [node name="Stats" type="Node" parent="."]
 
 [node name="HealthStat" type="Node" parent="Stats"]
 script = ExtResource("10_0fapk")
 max_value = 50.0
+
+[node name="SpeedStat" type="Node" parent="Stats"]
+script = ExtResource("10_0fapk")
+max_value = 100.0
 
 [node name="IgnisStat" type="Node" parent="Stats"]
 script = ExtResource("10_0fapk")
@@ -265,7 +274,7 @@ zoom_amount = 0.25
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health_stat", "knockback_component", "damage_flash_component")]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 52
 script = ExtResource("7_bu4xc")
 health_stat = NodePath("../Stats/HealthStat")
 knockback_component = NodePath("../Components/KnockbackComponent")
@@ -281,12 +290,13 @@ position = Vector2(0, -7)
 
 [node name="Sprite2D" type="Sprite2D" parent="Caster"]
 rotation = -1.5708
+scale = Vector2(1, 1.5)
 texture = ExtResource("20_4emjf")
 offset = Vector2(0, 4)
 flip_v = true
 
 [node name="CastMarker" type="Node2D" parent="Caster/Sprite2D"]
-position = Vector2(-9.53674e-07, 16)
+position = Vector2(0, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Caster"]
 

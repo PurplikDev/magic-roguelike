@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv6knoxmfch3c"]
+
+[ext_resource type="Script" path="res://scripts/spell_scenes/flame.gd" id="1_8fsnw"]
+[ext_resource type="Script" path="res://scripts/component/hurtbox.gd" id="1_t3gy0"]
+
+[sub_resource type="Gradient" id="Gradient_x3jbc"]
+offsets = PackedFloat32Array(0, 0.698413)
+colors = PackedColorArray(1, 0.792157, 0, 1, 1, 0.0666667, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_g8qe5"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qodd"]
+size = Vector2(6, 6)
+
+[node name="Flame" type="Node2D"]
+script = ExtResource("1_8fsnw")
+
+[node name="ActiveRoot" type="Node2D" parent="."]
+
+[node name="FlameParticle" type="CPUParticles2D" parent="ActiveRoot"]
+rotation = 3.14159
+emitting = false
+amount = 32
+lifetime = 0.25
+one_shot = true
+randomness = 1.0
+lifetime_randomness = 0.25
+emission_shape = 1
+emission_sphere_radius = 1.5
+direction = Vector2(0, -1)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+damping_min = 35.0
+damping_max = 40.0
+color_ramp = SubResource("Gradient_x3jbc")
+color_initial_ramp = SubResource("Gradient_g8qe5")
+
+[node name="Hurtbox" type="Area2D" parent="ActiveRoot"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_t3gy0")
+damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveRoot/Hurtbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_6qodd")
+
+[connection signal="finished" from="ActiveRoot/FlameParticle" to="." method="_on_flame_particle_finished"]

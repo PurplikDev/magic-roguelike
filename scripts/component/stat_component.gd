@@ -10,6 +10,7 @@ var value: float
 
 func _ready():
 	increase(max_value)
+	owner.add_to_group(name)
 
 func increase(increase_amount: float):
 	value += increase_amount
@@ -30,3 +31,9 @@ func update_value():
 	value_update.emit(value)
 	if value <= 0:
 		value_empty.emit()
+
+func set_value(p_value: float):
+	value = p_value
+	if value > max_value:
+		value = max_value
+	update_value()

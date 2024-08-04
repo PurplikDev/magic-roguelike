@@ -8,9 +8,9 @@
 script = ExtResource("1_ge1nn")
 spell_name = "Magic Bolt"
 spell_icon = ExtResource("2_3ampe")
-ignis_cost = 2.5
-aer_cost = 5.0
-terra_cost = 2.5
-aqua_cost = 2.5
+ignis_cost = 1.25
+aer_cost = 2.5
+terra_cost = 1.25
+aqua_cost = 1.25
 cast_cooldown = 0.5
 spell_scene = ExtResource("3_xp43v")

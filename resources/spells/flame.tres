@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=4 format=3 uid="uid://ek8jy82kr6cp"]
+
+[ext_resource type="Script" path="res://scripts/resource/spell.gd" id="1_jec1x"]
+[ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_cp8wt"]
+[ext_resource type="PackedScene" uid="uid://cv6knoxmfch3c" path="res://scenes/spell_scenes/flame.tscn" id="3_shgiv"]
+
+[resource]
+script = ExtResource("1_jec1x")
+spell_name = "Flame"
+spell_icon = ExtResource("2_cp8wt")
+ignis_cost = 0.5
+aer_cost = 0.25
+terra_cost = 0.0
+aqua_cost = 0.0
+cast_cooldown = 0.125
+spell_scene = ExtResource("3_shgiv")

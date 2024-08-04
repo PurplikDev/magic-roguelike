@@ -42,6 +42,9 @@ func stop_cast():
 func set_current_spell(index: int):
 	current_spell = spells[index]
 	cast_timer.wait_time = current_spell.cast_cooldown
+	if !cast_timer.is_stopped() && cast_timer.time_left > current_spell.cast_cooldown:
+		cast_timer.stop()
+		cast_timer.start()
 
 func cast():
 	if is_free || can_afford_cast(current_spell):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkfqmhfp1dm72"]
+[gd_scene load_steps=9 format=3 uid="uid://bkfqmhfp1dm72"]
 
 [ext_resource type="Script" path="res://scripts/spell_scenes/magic_bolt.gd" id="1_gc0vs"]
 [ext_resource type="Script" path="res://scripts/component/hurtbox.gd" id="1_nufxx"]
 [ext_resource type="Texture2D" uid="uid://cgku34nmatr5r" path="res://assets/icon.svg" id="2_f4gf4"]
 [ext_resource type="Script" path="res://scripts/component/simple_move_component.gd" id="3_18ugy"]
+[ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="5_s4lta"]
 
 [sub_resource type="Gradient" id="Gradient_k66b0"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -42,7 +43,7 @@ color_initial_ramp = SubResource("Gradient_k66b0")
 
 [node name="Hurtbox" type="Area2D" parent="ActiveRoot"]
 collision_layer = 32
-collision_mask = 0
+collision_mask = 32
 script = ExtResource("1_nufxx")
 damage = 5.0
 
@@ -54,11 +55,11 @@ rotation = 3.14159
 scale = Vector2(0.03125, 0.03125)
 texture = ExtResource("2_f4gf4")
 
-[node name="SimpleMoveComponent" type="Node" parent="ActiveRoot" node_paths=PackedStringArray("actor")]
+[node name="SimpleMoveComponent" type="Node" parent="ActiveRoot" node_paths=PackedStringArray("actor", "speed")]
 script = ExtResource("3_18ugy")
 actor = NodePath("../..")
 direction = Vector2(0, 1)
-speed = 25.0
+speed = NodePath("../../Stats/SpeedStat")
 
 [node name="ExplosionParticle" type="CPUParticles2D" parent="."]
 emitting = false
@@ -80,6 +81,12 @@ angle_max = 180.0
 scale_amount_min = 0.25
 scale_amount_max = 0.75
 color_initial_ramp = SubResource("Gradient_abhkl")
+
+[node name="Stats" type="Node" parent="."]
+
+[node name="SpeedStat" type="Node" parent="Stats"]
+script = ExtResource("5_s4lta")
+max_value = 50.0
 
 [connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timer_timeout"]
 [connection signal="hit" from="ActiveRoot/Hurtbox" to="." method="_on_hurtbox_hit"]
