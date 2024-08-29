@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d0prfsm42ycti"]
+[gd_scene load_steps=36 format=3 uid="uid://d0prfsm42ycti"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_vlahr"]
 [ext_resource type="Script" path="res://scripts/component/interaction_component.gd" id="2_3vj4m"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/component/anchored_camera.gd" id="8_sis3l"]
 [ext_resource type="Script" path="res://scripts/component/inventory_component.gd" id="8_yjaoh"]
 [ext_resource type="Script" path="res://scripts/component/animation_manager_component.gd" id="9_ibe2b"]
+[ext_resource type="Script" path="res://scripts/resource/spell.gd" id="9_m186i"]
 [ext_resource type="Resource" uid="uid://ce2w11wyeooa" path="res://resources/spells/magic_bolt.tres" id="9_p47wb"]
 [ext_resource type="Script" path="res://scripts/component/stat_component.gd" id="10_0fapk"]
 [ext_resource type="Texture2D" uid="uid://c5ni7mfv68212" path="res://assets/entity/player.png" id="10_c405t"]
@@ -182,7 +183,7 @@ ignis_stat = NodePath("../../Stats/IgnisStat")
 aer_stat = NodePath("../../Stats/AerStat")
 terra_stat = NodePath("../../Stats/TerraStat")
 aqua_stat = NodePath("../../Stats/AquaStat")
-spells = Array[Resource("res://scripts/resource/spell.gd")]([ExtResource("9_p47wb"), ExtResource("10_eu4x4"), ExtResource("11_spif7"), ExtResource("12_t05ho")])
+spells = Array[ExtResource("9_m186i")]([ExtResource("9_p47wb"), ExtResource("10_eu4x4"), ExtResource("11_spif7"), ExtResource("12_t05ho")])
 
 [node name="Stats" type="Node" parent="."]
 
