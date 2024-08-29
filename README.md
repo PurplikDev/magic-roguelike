@@ -15,3 +15,10 @@ roguelike game inspired by [thaumcraft](https://www.curseforge.com/minecraft/mc-
 
 ### some other plans
 - steamworks api -> multiplayer, achievements, leaderboards
+
+### showcase video
+[![youtube video showcase](https://markdown-videos-api.jorgenkh.no/youtube/rZkrONSZuQo)](https://youtu.be/rZkrONSZuQo)
+
+<video width="320" height="240" controls>
+  <source src="magic-roguelike-showcase.mp4" type="video/mp4">
+</video>
