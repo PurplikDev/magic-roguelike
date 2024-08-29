@@ -318,6 +318,17 @@ autoplay = "sleeping"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Scene"]
 
+[node name="ColorRect" type="ColorRect" parent="Scene/ParallaxBackground"]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.0224, 0.06, 1)
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Scene/ParallaxBackground"]
 modulate = Color(0.25, 0.25, 0.25, 1)
 motion_scale = Vector2(0.8, 0.8)
@@ -343,6 +354,19 @@ texture = ExtResource("6_7ibgf")
 position = Vector2(0, -34)
 scale = Vector2(0.677778, 0.677778)
 texture = ExtResource("6_7ibgf")
+
+[node name="ColorRect" type="ColorRect" parent="Scene/ParallaxBackground/ParallaxLayer3"]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -20.0
+offset_right = 107.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.026, 0.13, 0.0728, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
