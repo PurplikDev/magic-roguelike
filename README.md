@@ -15,3 +15,6 @@ roguelike game inspired by [thaumcraft](https://www.curseforge.com/minecraft/mc-
 
 ### some other plans
 - steamworks api -> multiplayer, achievements, leaderboards
+
+### showcase video
+- [`youtube link`](https://youtu.be/rZkrONSZuQo)
